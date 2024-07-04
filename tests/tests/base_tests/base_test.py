@@ -12,13 +12,16 @@
 # permissions and limitations under the License.
 
 import unittest
+import appium
 from appium import webdriver
 from tests.pages import NavigationPage
+from appium.options.ios import XCUITestOptions
 
 
 class BaseTest(unittest.TestCase):
     """Basis for all tests."""
     def setUp(self):
+        print(appium.version.version)
         """Sets up desired capabilities and the Appium driver."""
         url = 'http://127.0.0.1:4723/wd/hub'
         desired_caps = {}
@@ -31,7 +34,9 @@ class BaseTest(unittest.TestCase):
         desired_caps['deviceName'] = 'iPhone'
         """
 
-        self.driver = webdriver.Remote(url, desired_caps)
+        options = XCUITestOptions()
+
+        self.driver = webdriver.Remote(url, options=options)
         self.navigation_page = NavigationPage(self.driver)
 
     def tearDown(self):

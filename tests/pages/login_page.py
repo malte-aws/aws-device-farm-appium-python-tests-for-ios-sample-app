@@ -12,7 +12,7 @@
 # permissions and limitations under the License.
 
 from tests.pages.base_pages.base_page import BasePage
-
+from appium.webdriver.common.appiumby import AppiumBy
 
 class LoginPage(BasePage):
     """Login page representation."""
@@ -38,9 +38,16 @@ class LoginPage(BasePage):
 
     def log_in(self, username, password):
         """Types in inputted username and password and presses log in button."""
-        username_field = self.driver.find_element_by_class_name(self.TEXT_FIELD_CLASS)
-        password_field = self.driver.find_element_by_class_name(self.SECURE_TEXT_FIELD_CLASS)
-        log_in_button = self.driver.find_element_by_accessibility_id(self.LOGIN_BUTTON_ID)
+        
+        username_field = self.driver.find_element(by=AppiumBy.CLASS_NAME, value=self.TEXT_FIELD_CLASS)# self.driver.find_element_by_class_name(self.TEXT_FIELD_CLASS)
+        password_field = self.driver.find_element(by=AppiumBy.CLASS_NAME, value=self.SECURE_TEXT_FIELD_CLASS) # self.driver.find_element_by_class_name(self.SECURE_TEXT_FIELD_CLASS)
+        
+        print(username_field)
+        print(password_field)
+        text_fields = self.driver.find_elements(by=AppiumBy.CLASS_NAME, value=self.TEXT_FIELD_CLASS)
+        for field in text_fields:
+            print(field)
+        log_in_button = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.LOGIN_BUTTON_ID) #self.driver.find_element_by_accessibility_id(self.LOGIN_BUTTON_ID)
 
         username_field.send_keys(username)
         password_field.send_keys(password)
@@ -48,22 +55,22 @@ class LoginPage(BasePage):
 
     def is_valid_login_message_displayed(self):
         """Returns visibility of valid login message as a boolean."""
-        logged_in_message = self.driver.find_element_by_accessibility_id(self.LOGGED_IN_MESSAGE_ID)
+        logged_in_message = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.LOGGED_IN_MESSAGE_ID) #self.driver.find_element_by_accessibility_id(self.LOGGED_IN_MESSAGE_ID)
         return logged_in_message.is_displayed()
 
     def is_invalid_login_message_displayed(self):
         """Returns visibility of invalid login message as a boolean."""
-        permission_denied_message = self.driver.find_element_by_accessibility_id(self.PERMISSION_DENIED_MESSAGE_ID)
+        permission_denied_message = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.PERMISSION_DENIED_MESSAGE_ID) # self.driver.find_element_by_accessibility_id(self.PERMISSION_DENIED_MESSAGE_ID)
         return permission_denied_message.is_displayed()
 
     def click_log_out_button(self):
         """Taps the log out button."""
-        log_out_button = self.driver.find_element_by_accessibility_id(self.LOGOUT_BUTTON_ID)
+        log_out_button =  self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.LOGOUT_BUTTON_ID) #self.driver.find_element_by_accessibility_id(self.LOGOUT_BUTTON_ID)
         self.tap_button_center(log_out_button)
 
     def click_try_again_button(self):
         """Taps the try again button."""
-        try_again_button = self.driver.find_element_by_accessibility_id(self.TRY_AGAIN_BUTTON_ID)
+        try_again_button = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.TRY_AGAIN_BUTTON_ID) #self.driver.find_element_by_accessibility_id(self.TRY_AGAIN_BUTTON_ID)
         self.tap_button_center(try_again_button)
 
     def is_at_login(self):
@@ -71,5 +78,5 @@ class LoginPage(BasePage):
 
         Simply checks the visibility of the login button.
         """
-        log_in_button = self.driver.find_element_by_accessibility_id(self.LOGIN_BUTTON_ID)
+        log_in_button = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.LOGIN_BUTTON_ID) # self.driver.find_element_by_accessibility_id(self.LOGIN_BUTTON_ID)
         return log_in_button.is_displayed()

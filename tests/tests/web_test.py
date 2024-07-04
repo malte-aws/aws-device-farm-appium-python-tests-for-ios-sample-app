@@ -11,7 +11,7 @@
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-from base_tests.base_test import BaseTest
+from .base_tests.base_test import BaseTest
 from tests.pages import WebPage
 
 
@@ -26,7 +26,7 @@ class WebTest(BaseTest):
         self.web_page = WebPage(self.driver)
 
     def get_name(self):
-        return PAGE_NAME
+        return self.PAGE_NAME
 
     def test_web_view(self):
         """Verifies web view is displayed."""

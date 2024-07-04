@@ -12,7 +12,7 @@
 # permissions and limitations under the License.
 
 from tests.pages.base_pages.base_page import BasePage
-
+from appium.webdriver.common.appiumby import AppiumBy
 
 class DateSelectorPage(BasePage):
     MONTH_INDEX = 0
@@ -27,11 +27,13 @@ class DateSelectorPage(BasePage):
         day -- the day as a string
         year -- the year as a string
         """
-        wheels = self.driver.find_elements_by_class_name(self.PICKER_WHEEL_CLASS)
+        wheels = self.driver.find_elements(by=AppiumBy.ACCESSIBILITY_ID, value=self.PICKER_WHEEL_CLASS)# self.driver.find_elements_by_class_name(self.PICKER_WHEEL_CLASS)
 
-        month_wheel = wheels[MONTH_INDEX]
-        day_wheel = wheels[DAY_INDEX]
-        year_wheel = wheels[YEAR_INDEX]
+        print(wheels)
+        
+        month_wheel = wheels[self.MONTH_INDEX]
+        day_wheel = wheels[self.DAY_INDEX]
+        year_wheel = wheels[self.YEAR_INDEX]
 
         month_wheel.send_keys(month)
         day_wheel.send_keys(day)
@@ -39,5 +41,5 @@ class DateSelectorPage(BasePage):
 
     def get_selected_date(self):
         """Retrieves selected date as a string (Month is truncated to three letters)."""
-        date = self.driver.find_element_by_class_name(self.STATIC_TEXT_CLASS)
+        date = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.STATIC_TEXT_CLASS)# self.driver.find_element_by_class_name(self.STATIC_TEXT_CLASS)
         return date.text

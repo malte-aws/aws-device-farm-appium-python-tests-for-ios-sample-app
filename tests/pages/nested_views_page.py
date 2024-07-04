@@ -12,6 +12,7 @@
 # permissions and limitations under the License.
 
 from tests.pages.base_pages.base_page import BasePage
+from appium.webdriver.common.appiumby import AppiumBy
 
 
 class NestedViewsPage(BasePage):
@@ -21,16 +22,19 @@ class NestedViewsPage(BasePage):
 
     def click_next_button(self):
         """Taps on the next button."""
-        next_button = self.driver.find_element_by_accessibility_id(self.NEXT_BUTTON_ID)
+        next_button = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.NEXT_BUTTON_ID) # self.driver.find_element_by_accessibility_id(self.NEXT_BUTTON_ID)
         next_button.click()
 
     def click_back_button(self):
         """Taps on the back button."""
-        back_button = self.driver.find_element_by_accessibility_id(self.BACK_BUTTON_ID)
+        back_button = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.BACK_BUTTON_ID) #self.driver.find_element_by_accessibility_id(self.BACK_BUTTON_ID)
         back_button.click()
 
     def get_static_text(self):
         """Returns text on a nested view page."""
-        static_texts = self.driver.find_elements_by_class_name(self.STATIC_TEXT_CLASS)
-        nested_text = static_texts[-1] # Retrieves the topmost static text object
+        static_texts =  self.driver.find_elements(by=AppiumBy.CLASS_NAME, value=self.STATIC_TEXT_CLASS) # self.driver.find_elements_by_class_name(self.STATIC_TEXT_CLASS)
+        if isinstance(static_texts, list):
+            nested_text = static_texts[-1] # Retrieves the topmost static text object
+        else:
+            nested_text = static_texts
         return nested_text.text

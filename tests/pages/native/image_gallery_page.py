@@ -11,12 +11,12 @@
 # express or implied. See the License for the specific language governing
 # permissions and limitations under the License.
 
-from tests.pages.base_pages.base_page import *
-
+from ..base_pages.base_page import *
+from appium.webdriver.common.appiumby import AppiumBy
 
 class ImageGalleryPage(BasePage):
     """Image gallery page representation."""
     def image_gallery_is_displayed(self):
         """Returns visibility of image gallery as a boolean."""
-        image_gallery = self.driver.find_element_by_class_name(self.COLLECTION_VIEW_CLASS)
+        image_gallery =  self.driver.find_element(by=AppiumBy.CLASS_NAME, value=self.COLLECTION_VIEW_CLASS) # self.driver.find_element_by_class_name(self.COLLECTION_VIEW_CLASS)
         return image_gallery.is_displayed()

@@ -12,6 +12,7 @@
 # permissions and limitations under the License.
 
 from tests.pages.base_pages.base_page import BasePage
+from appium.webdriver.common.appiumby import AppiumBy
 
 
 class AlertsPage(BasePage):
@@ -21,15 +22,18 @@ class AlertsPage(BasePage):
 
     def click_modal_button(self):
         """Taps the modal button."""
-        modal_button = self.driver.find_element_by_accessibility_id(self.MODAL_BUTTON_ID)
+        modal_button = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.MODAL_BUTTON_ID)
+        # modal_button = self.driver.find_element_by_accessibility_id(self.MODAL_BUTTON_ID)
         modal_button.click()
 
     def modal_text_is_displayed(self):
         """Returns visibility of modal's message as a boolean."""
-        modal_text = self.driver.find_element_by_class_name(self.STATIC_TEXT_CLASS)
+        modal_text = self.driver.find_element(by=AppiumBy.CLASS_NAME, value=self.STATIC_TEXT_CLASS)
+        # modal_text = self.driver.find_element_by_class_name(self.STATIC_TEXT_CLASS)
         return modal_text.is_displayed()
 
     def accept_message(self):
         """Taps the OK button to accept the modal."""
-        ok_button = self.driver.find_element_by_accessibility_id(self.OK_BUTTON_ID)
+        ok_button = self.driver.find_element(by=AppiumBy.ACCESSIBILITY_ID, value=self.OK_BUTTON_ID)
+        # ok_button = self.driver.find_element_by_accessibility_id(self.OK_BUTTON_ID)
         ok_button.click()

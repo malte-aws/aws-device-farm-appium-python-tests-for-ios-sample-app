@@ -12,8 +12,8 @@
 # permissions and limitations under the License.
 
 from time import sleep
-from base_test import BaseTest
-from tests.pages import TabViewPage
+from .base_test import BaseTest
+from ...pages import TabViewPage
 
 
 class BaseTabTest(BaseTest):
