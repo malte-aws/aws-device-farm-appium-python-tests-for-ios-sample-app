@@ -6,3 +6,4 @@ pip-selfcheck.json
 selenium/
 wheelhouse/
 *.pyc
+*.DS_Store
